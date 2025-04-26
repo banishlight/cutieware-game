@@ -4,13 +4,16 @@ const WallObstacle = preload("res://obstacle.tscn")
 
 @onready var deathPlane: Area2D = $DeathPlane
 @onready var ship: CharacterBody2D = $Ship
-@onready var deathLabel = $YouAreDead
+@onready var deathLabel: Label = $YouAreDead
 @onready var spawn_zone: ColorRect = $SpawnZone
 @onready var obstacleTimer: Timer = $ObstacleTimer
+@onready var fuelLabel: Label = $FuelLabel
+
 func _ready():
 	spawn_zone.hide()
 	deathPlane.area_entered.connect(_check_if_dead)
 	obstacleTimer.timeout.connect(_spawn_obstacle)
+	Events.out_of_fuel.connect(_out_of_fuel)
 
 	
 ## func _physics_process(delta: float) -> void:
@@ -29,3 +32,5 @@ func _spawn_obstacle():
 	wall.position = Vector2(wall_x, wall_y)
 	add_child(wall)
 	
+func _out_of_fuel():
+	fuelLabel.text= "OUT OF FUEL"

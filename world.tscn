@@ -58,6 +58,7 @@ shape = SubResource("RectangleShape2D_aqk2v")
 debug_color = Color(1, 0, 0, 0.294118)
 
 [node name="YouAreDead" type="Label" parent="."]
+visibility_layer = 16
 offset_left = 55.0
 offset_top = 39.0
 offset_right = 286.0
@@ -79,3 +80,10 @@ color = Color(0, 1, 0, 0.203922)
 [node name="ObstacleTimer" type="Timer" parent="."]
 wait_time = 5.0
 autostart = true
+
+[node name="FuelLabel" type="Label" parent="."]
+visibility_layer = 16
+offset_left = 19.0
+offset_top = -1.0
+offset_right = 193.0
+offset_bottom = 22.0

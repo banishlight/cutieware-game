@@ -1,10 +1,7 @@
 extends CharacterBody2D
 
-
-##func _ready():
-
 var SPEED = 50
-var maxFuel = 100
+var maxFuel = 5
 var currentFuel = maxFuel
 
 ## On physics tick...
@@ -27,6 +24,9 @@ func _physics_process(delta: float):
 	else:
 		#slowly start dropping (glide)
 		velocity.y = 6
-		
+	
+	if currentFuel==0:
+		Events.out_of_fuel.emit()
+	
 	move_and_slide()
 	

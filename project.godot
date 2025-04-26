@@ -15,6 +15,10 @@ run/main_scene="uid://ysd0nqcph1uq"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Events="*res://events.gd"
+
 [display]
 
 window/size/viewport_width=320
@@ -26,6 +30,8 @@ window/stretch/scale_mode="integer"
 
 [layer_names]
 
+2d_render/layer_1="Other Stuff"
+2d_render/layer_5="UI"
 2d_physics/layer_1="World"
 2d_physics/layer_2="Obstacles"
 
