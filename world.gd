@@ -16,7 +16,7 @@ const FuelPickup = preload("res://fuel.tscn")
 
 func _ready():
 	spawn_zone.hide()
-	deathPlane.area_entered.connect(_check_if_dead)
+	deathPlane.body_entered.connect(_check_if_dead)
 	obstacleTimer.timeout.connect(_spawn_obstacle)
 	Events.out_of_fuel.connect(_out_of_fuel)
 	Events.updateFuel.connect(_update_fuel.bind())
@@ -24,10 +24,10 @@ func _ready():
 	despawn_zone.body_entered.connect(_despawn_obstacle)
 	fuelTimer.timeout.connect(_spawn_fuel)
 
-func _check_if_dead(area: Area2D):
-	## don't even bother worrying about enemy deathboxes
-	ship.queue_free()
-	deathLabel.text = "YOU ARE DEAD"
+func _check_if_dead(area: Node2D):
+	if(area is CharacterBody2D):
+		ship.queue_free()
+		deathLabel.text = "YOU ARE DEAD"
 	
 func _spawn_obstacle():
 	var wall = WallObstacle.instantiate()
