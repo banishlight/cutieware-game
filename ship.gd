@@ -27,6 +27,6 @@ func _physics_process(delta: float):
 	
 	if currentFuel==0:
 		Events.out_of_fuel.emit()
-	
+	Events.updateFuel.emit(currentFuel)
 	move_and_slide()
 	

@@ -8,12 +8,14 @@ const WallObstacle = preload("res://obstacle.tscn")
 @onready var spawn_zone: ColorRect = $SpawnZone
 @onready var obstacleTimer: Timer = $ObstacleTimer
 @onready var fuelLabel: Label = $FuelLabel
+@onready var fuelCountLabel: Label = $FuelCountLabel
 @onready var despawn_zone: Area2D = $DespawnZone
 func _ready():
 	spawn_zone.hide()
 	deathPlane.area_entered.connect(_check_if_dead)
 	obstacleTimer.timeout.connect(_spawn_obstacle)
 	Events.out_of_fuel.connect(_out_of_fuel)
+	Events.updateFuel.connect(_update_fuel.bind())
 	despawn_zone.body_entered.connect(_despawn_obstacle)
 
 func _check_if_dead(area: Area2D):
@@ -35,3 +37,5 @@ func _out_of_fuel():
 	
 func _despawn_obstacle(object: Node2D):
 	object.queue_free()
+func _update_fuel(count):
+	fuelCountLabel.text = "Fuel: " + str(count)
