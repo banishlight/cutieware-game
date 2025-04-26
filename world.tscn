@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ysd0nqcph1uq"]
+[gd_scene load_steps=10 format=3 uid="uid://ysd0nqcph1uq"]
 
 [ext_resource type="Texture2D" uid="uid://bsavk3no7bryy" path="res://assets/starbackground.png" id="1_f3sb7"]
 [ext_resource type="Script" uid="uid://dabglewe3snp1" path="res://world.gd" id="1_tlwt5"]
@@ -15,6 +15,9 @@ size = Vector2(367, 20)
 size = Vector2(360, 20)
 
 [sub_resource type="LabelSettings" id="LabelSettings_tlwt5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_036b0"]
+size = Vector2(55, 240)
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_tlwt5")
@@ -49,6 +52,7 @@ position = Vector2(162, 201)
 shape = SubResource("RectangleShape2D_tlwt5")
 
 [node name="DeathPlane" type="Area2D" parent="."]
+collision_layer = 0
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -66,6 +70,7 @@ offset_bottom = 145.0
 label_settings = SubResource("LabelSettings_tlwt5")
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_lock_ = true
 
 [node name="Wall" parent="." instance=ExtResource("4_aqk2v")]
 position = Vector2(280, 0)
@@ -87,3 +92,14 @@ offset_left = 19.0
 offset_top = -1.0
 offset_right = 193.0
 offset_bottom = 22.0
+metadata/_edit_lock_ = true
+
+[node name="DespawnZone" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DespawnZone"]
+position = Vector2(-19, 91)
+shape = SubResource("RectangleShape2D_036b0")
+debug_color = Color(0.787252, 0.000234204, 0.718417, 0.42)
