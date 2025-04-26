@@ -1,17 +1,24 @@
 extends Node2D
 
 const WallObstacle = preload("res://obstacle.tscn")
+const RockfallObstacle = preload("res://rockfall.tscn")
 const FuelPickup = preload("res://fuel.tscn")
 
-@onready var deathPlane: Area2D = $DeathPlane
-@onready var ship: CharacterBody2D = $Ship
-@onready var deathLabel: Label = $YouAreDead
+
 @onready var spawn_zone: ColorRect = $SpawnZone
+@onready var deathPlane: Area2D = $DeathPlane
+@onready var despawn_zone: Area2D = $DespawnZone
+@onready var top_spawn: ColorRect = $TopSpawn
+
+@onready var ship: CharacterBody2D = $Ship
+
 @onready var obstacleTimer: Timer = $ObstacleTimer
 @onready var fuelTimer: Timer = $FuelTimer
+
 @onready var fuelLabel: Label = $FuelLabel
 @onready var fuelCountLabel: Label = $FuelCountLabel
-@onready var despawn_zone: Area2D = $DespawnZone
+@onready var deathLabel: Label = $YouAreDead
+
 
 
 func _ready():
@@ -30,6 +37,14 @@ func _check_if_dead(area: Node2D):
 		deathLabel.text = "YOU ARE DEAD"
 	
 func _spawn_obstacle():
+	var num = randi() % 2
+	if num == 2:
+		spawn_wall()
+	else:
+		spawn_rockfall()
+	
+	
+func spawn_wall():
 	var wall = WallObstacle.instantiate()
 	var rect = spawn_zone.get_global_rect()
 	var wall_x = randf_range(rect.position.x, rect.end.x)
@@ -37,6 +52,15 @@ func _spawn_obstacle():
 	var wall_y = randf_range(rect.position.y-10, rect.end.y+10)
 	wall.position = Vector2(wall_x, wall_y)
 	add_child(wall)
+	
+func spawn_rockfall():
+	var r_fall = RockfallObstacle.instantiate()
+	var rect = top_spawn.get_global_rect()
+	var r_fall_x = randf_range(rect.position.x, rect.end.x)
+	##Walls should appear on screen, but can have the tops out of view.
+	var r_fall_y = randf_range(rect.position.y-10, rect.end.y+10)
+	r_fall.position = Vector2(r_fall_x, r_fall_y)
+	add_child(r_fall)
 	
 func _spawn_fuel():
 	var fuel = FuelPickup.instantiate()
