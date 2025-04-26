@@ -1,0 +1,31 @@
+extends Node2D
+
+const WallObstacle = preload("res://obstacle.tscn")
+
+@onready var deathPlane: Area2D = $DeathPlane
+@onready var ship: CharacterBody2D = $Ship
+@onready var deathLabel = $YouAreDead
+@onready var spawn_zone: ColorRect = $SpawnZone
+@onready var obstacleTimer: Timer = $ObstacleTimer
+func _ready():
+	spawn_zone.hide()
+	deathPlane.area_entered.connect(_check_if_dead)
+	obstacleTimer.timeout.connect(_spawn_obstacle)
+
+	
+## func _physics_process(delta: float) -> void:
+
+func _check_if_dead(area: Area2D):
+	## don't even bother worrying about enemy deathboxes
+	ship.queue_free()
+	deathLabel.text = "YOU ARE DEAD"
+	
+func _spawn_obstacle():
+	var wall = WallObstacle.instantiate()
+	var rect = spawn_zone.get_global_rect()
+	var wall_x = randf_range(rect.position.x, rect.end.x)
+	##Walls should appear on screen, but can have the tops out of view.
+	var wall_y = randf_range(rect.position.y-10, rect.end.y+10)
+	wall.position = Vector2(wall_x, wall_y)
+	add_child(wall)
+	
