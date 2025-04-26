@@ -34,6 +34,7 @@ window/stretch/scale_mode="integer"
 2d_render/layer_5="UI"
 2d_physics/layer_1="World"
 2d_physics/layer_2="Obstacles"
+2d_physics/layer_3="Powerups"
 
 [rendering]
 

@@ -72,9 +72,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_lock_ = true
 
-[node name="Wall" parent="." instance=ExtResource("4_aqk2v")]
-position = Vector2(280, 0)
-
 [node name="SpawnZone" type="ColorRect" parent="."]
 offset_left = 337.0
 offset_top = -8.0
@@ -84,6 +81,10 @@ color = Color(0, 1, 0, 0.203922)
 
 [node name="ObstacleTimer" type="Timer" parent="."]
 wait_time = 5.0
+autostart = true
+
+[node name="FuelTimer" type="Timer" parent="."]
+wait_time = 6.0
 autostart = true
 
 [node name="FuelLabel" type="Label" parent="."]
@@ -106,8 +107,12 @@ metadata/_edit_lock_ = true
 collision_layer = 0
 collision_mask = 2
 metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DespawnZone"]
 position = Vector2(-63, 93)
 shape = SubResource("RectangleShape2D_036b0")
 debug_color = Color(0.787252, 0.000234204, 0.718417, 0.42)
+
+[node name="Wall" parent="." instance=ExtResource("4_aqk2v")]
+position = Vector2(320, 0)

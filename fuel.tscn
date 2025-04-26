@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://cfmocyfnlsxog"]
+
+[ext_resource type="Script" uid="uid://b4hekjngpjlv4" path="res://fuel.gd" id="1_gfiwy"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vi8y8"]
+load_path = "res://.godot/imported/fuel.png-20f179ca4cf454308f4ac5cdf6dde6fa.ctex"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f7cmv"]
+size = Vector2(23, 22)
+
+[node name="Fuel" type="Sprite2D"]
+texture = SubResource("CompressedTexture2D_vi8y8")
+script = ExtResource("1_gfiwy")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="PickupBox" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_f7cmv")

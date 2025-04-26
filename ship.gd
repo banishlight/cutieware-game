@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 var SPEED = 50
-var maxFuel = 100
+var maxFuel = 1000
 var currentFuel = maxFuel
 
 ## On physics tick...
