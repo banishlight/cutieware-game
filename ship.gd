@@ -7,7 +7,10 @@ var currentFuel = maxFuel
 
 ## On physics tick...
 func _physics_process(delta: float):
+	var forward = false
+	velocity.y = 0
 	if Input.is_action_pressed("ui_right"):
+		forward = true
 		if currentFuel >= 0:
 			currentFuel -= 1
 			velocity.x = SPEED
@@ -27,7 +30,8 @@ func _physics_process(delta: float):
 		sprite.frame = 1
 	else:
 		#slowly start dropping (glide)
-		velocity.y = 6
+		if (!forward):
+			velocity.y = 6
 		sprite.frame = 0
 	
 	if currentFuel==0:
