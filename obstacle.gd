@@ -9,5 +9,5 @@ func _ready():
 func start_tween():
 	var tween = get_tree().create_tween().set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
 	tween.set_loops().set_parallel(false)
-	tween.tween_property(self, "position", Vector2.LEFT, duration)
+	tween.tween_property(self, "position", Vector2(-40, self.position.y), duration)
 	##tween.tween_property(self, "position", Vector2(-40,0), duration)
