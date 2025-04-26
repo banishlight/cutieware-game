@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ysd0nqcph1uq"]
+[gd_scene load_steps=11 format=3 uid="uid://ysd0nqcph1uq"]
 
 [ext_resource type="Texture2D" uid="uid://bsavk3no7bryy" path="res://assets/starbackground.png" id="1_f3sb7"]
 [ext_resource type="Script" uid="uid://dabglewe3snp1" path="res://world.gd" id="1_tlwt5"]
@@ -13,6 +13,9 @@ size = Vector2(367, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aqk2v"]
 size = Vector2(360, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dwbse"]
+size = Vector2(21, 229)
 
 [sub_resource type="LabelSettings" id="LabelSettings_tlwt5"]
 
@@ -53,13 +56,18 @@ shape = SubResource("RectangleShape2D_tlwt5")
 
 [node name="DeathPlane" type="Area2D" parent="."]
 collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeathPlane"]
+position = Vector2(160, 199)
+shape = SubResource("RectangleShape2D_aqk2v")
+debug_color = Color(1, 0, 0, 0.294118)
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DeathPlane"]
-position = Vector2(160, 197)
-shape = SubResource("RectangleShape2D_aqk2v")
-debug_color = Color(1, 0, 0, 0.294118)
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="DeathPlane"]
+position = Vector2(-24.5, 94.5)
+shape = SubResource("RectangleShape2D_dwbse")
+debug_color = Color(0.7, 0, 0, 0.419608)
 
 [node name="YouAreDead" type="Label" parent="."]
 visibility_layer = 16
@@ -86,6 +94,12 @@ autostart = true
 [node name="FuelTimer" type="Timer" parent="."]
 wait_time = 6.0
 autostart = true
+
+[node name="DistanceLabel" type="Label" parent="."]
+offset_left = 204.0
+offset_top = 247.0
+offset_right = 244.0
+offset_bottom = 270.0
 
 [node name="FuelLabel" type="Label" parent="."]
 visibility_layer = 16
