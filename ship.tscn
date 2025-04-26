@@ -1,7 +1,36 @@
-[gd_scene load_steps=5 format=3 uid="uid://0dc5bhywxsec"]
+[gd_scene load_steps=9 format=3 uid="uid://0dc5bhywxsec"]
 
 [ext_resource type="Script" uid="uid://dnu06f1n6v2k2" path="res://ship.gd" id="1_4cq66"]
-[ext_resource type="Texture2D" uid="uid://eihn4kf56hg3" path="res://assets/ship.png" id="2_v4325"]
+[ext_resource type="Texture2D" uid="uid://5lm32gmk68wy" path="res://ship-Sheet.png" id="2_4cq66"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v4325"]
+atlas = ExtResource("2_4cq66")
+region = Rect2(0, 0, 20, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c3vuw"]
+atlas = ExtResource("2_4cq66")
+region = Rect2(20, 0, 20, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_78o8j"]
+atlas = ExtResource("2_4cq66")
+region = Rect2(40, 0, 20, 12)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xpsff"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v4325")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c3vuw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_78o8j")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c3vuw"]
 size = Vector2(13, 5)
@@ -15,8 +44,8 @@ motion_mode = 1
 script = ExtResource("1_4cq66")
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_v4325")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_xpsff")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, -0.5)
