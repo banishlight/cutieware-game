@@ -16,9 +16,6 @@ func _ready():
 	Events.out_of_fuel.connect(_out_of_fuel)
 	despawn_zone.body_entered.connect(_despawn_obstacle)
 
-	
-## func _physics_process(delta: float) -> void:
-
 func _check_if_dead(area: Area2D):
 	## don't even bother worrying about enemy deathboxes
 	ship.queue_free()
@@ -36,8 +33,5 @@ func _spawn_obstacle():
 func _out_of_fuel():
 	fuelLabel.text= "OUT OF FUEL"
 	
-	
-	
 func _despawn_obstacle(object: Node2D):
-	print(object)
 	object.queue_free()

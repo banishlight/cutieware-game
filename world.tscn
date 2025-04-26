@@ -100,6 +100,6 @@ collision_mask = 2
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DespawnZone"]
-position = Vector2(-19, 91)
+position = Vector2(-63, 93)
 shape = SubResource("RectangleShape2D_036b0")
 debug_color = Color(0.787252, 0.000234204, 0.718417, 0.42)
