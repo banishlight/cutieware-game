@@ -22,6 +22,7 @@ const FuelPickup = preload("res://fuel.tscn")
 
 var metersTravelled = 0
 var difficulty = 1
+var gameOver = false
 
 func _ready():
 	spawn_zone.hide()
@@ -35,19 +36,20 @@ func _ready():
 	fuelTimer.timeout.connect(_spawn_fuel)
 
 func _process(_delta: float):
-	metersTravelled = metersTravelled+1
-	distanceLabel.text= str(metersTravelled)
-	## 20% speed increase every difficulty rank
-	if(metersTravelled> (difficulty*1000) && difficulty < 10):
-		obstacleTimer.wait_time = obstacleTimer.wait_time* - (obstacleTimer.wait_time*.20)
-		rockTimer.wait_time = rockTimer.wait_time - (rockTimer.wait_time*.20)
-		difficulty = difficulty+1
-		
+	if !gameOver:
+		metersTravelled = metersTravelled+1
+		distanceLabel.text= str(metersTravelled)
+		## 20% speed increase every difficulty rank
+		if(metersTravelled> (difficulty*1000) && difficulty < 10):
+			obstacleTimer.wait_time = obstacleTimer.wait_time* - (obstacleTimer.wait_time*.20)
+			rockTimer.wait_time = rockTimer.wait_time - (rockTimer.wait_time*.20)
+			difficulty = difficulty+1
 	
 
 func _check_if_dead(area: Node2D):
 	if(area is CharacterBody2D):
 		ship.queue_free()
+		gameOver = true
 		deathLabel.text = "YOU ARE DEAD"
 	
 func _spawn_wall():
