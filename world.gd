@@ -13,6 +13,7 @@ const FuelPickup = preload("res://fuel.tscn")
 @onready var ship: CharacterBody2D = $Ship
 
 @onready var obstacleTimer: Timer = $ObstacleTimer
+@onready var rockTimer: Timer = $RockTimer
 @onready var fuelTimer: Timer = $FuelTimer
 
 @onready var fuelLabel: Label = $FuelLabel
@@ -24,7 +25,8 @@ const FuelPickup = preload("res://fuel.tscn")
 func _ready():
 	spawn_zone.hide()
 	deathPlane.body_entered.connect(_check_if_dead)
-	obstacleTimer.timeout.connect(_spawn_obstacle)
+	obstacleTimer.timeout.connect(_spawn_wall)
+	rockTimer.timeout.connect(_spawn_rockfall)
 	Events.out_of_fuel.connect(_out_of_fuel)
 	Events.updateFuel.connect(_update_fuel.bind())
 	Events.add_fuel.connect(_add_fuel.bind())
@@ -36,15 +38,7 @@ func _check_if_dead(area: Node2D):
 		ship.queue_free()
 		deathLabel.text = "YOU ARE DEAD"
 	
-func _spawn_obstacle():
-	var num = randi() % 2
-	if num == 0:
-		spawn_wall()
-	else:
-		spawn_rockfall()
-	
-	
-func spawn_wall():
+func _spawn_wall():
 	var wall = WallObstacle.instantiate()
 	var rect = spawn_zone.get_global_rect()
 	var wall_x = randf_range(rect.position.x, rect.end.x)
@@ -53,7 +47,7 @@ func spawn_wall():
 	wall.position = Vector2(wall_x, wall_y)
 	add_child(wall)
 	
-func spawn_rockfall():
+func _spawn_rockfall():
 	var r_fall = RockfallObstacle.instantiate()
 	var rect = top_spawn.get_global_rect()
 	var r_fall_x = randf_range(rect.position.x+10, rect.end.x-10)

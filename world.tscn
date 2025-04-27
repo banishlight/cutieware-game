@@ -91,6 +91,10 @@ color = Color(0, 1, 0, 0.203922)
 wait_time = 3.5
 autostart = true
 
+[node name="RockTimer" type="Timer" parent="."]
+wait_time = 2.5
+autostart = true
+
 [node name="FuelTimer" type="Timer" parent="."]
 wait_time = 6.0
 autostart = true
