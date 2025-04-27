@@ -1,7 +1,7 @@
 extends Node2D
 
 const WallObstacle = preload("res://obstacle.tscn")
-const RockfallObstacle = preload("res://rockfall.tscn")
+const RockfallObstacle = preload("res://telegraph.tscn")
 const FuelPickup = preload("res://fuel.tscn")
 
 
@@ -57,10 +57,9 @@ func spawn_wall():
 func spawn_rockfall():
 	var r_fall = RockfallObstacle.instantiate()
 	var rect = top_spawn.get_global_rect()
-	var r_fall_x = randf_range(rect.position.x, rect.end.x)
-	##Walls should appear on screen, but can have the tops out of view.
-	var r_fall_y = randf_range(rect.position.y-10, rect.end.y+10)
-	r_fall.position = Vector2(r_fall_x, r_fall_y)
+	var r_fall_x = randf_range(rect.position.x+10, rect.end.x-10)
+	##Telegraphs should be at the ceiling of the playfield.
+	r_fall.position = Vector2(r_fall_x, 10)
 	add_child(r_fall)
 	
 func _spawn_fuel():
