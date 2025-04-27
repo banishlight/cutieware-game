@@ -1,6 +1,6 @@
 extends AnimatedSprite2D
 
-const RockfallObstacle = preload("res://rockfall.tscn")
+const RockfallObstacle = preload("res://rockfall_2.tscn")
 
 @onready var obstacleTimer: Timer = $SpawnTimer
 
