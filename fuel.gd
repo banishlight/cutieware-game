@@ -16,7 +16,7 @@ func start_tween():
 
 func _pickup_check(area: Node2D):
 	if(area is CharacterBody2D):
-		Events.add_fuel.emit(500)
+		Events.add_fuel.emit(400)
 		queue_free()
 	
 	

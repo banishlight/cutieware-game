@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ysd0nqcph1uq"]
+[gd_scene load_steps=14 format=3 uid="uid://ysd0nqcph1uq"]
 
 [ext_resource type="Texture2D" uid="uid://bsavk3no7bryy" path="res://assets/starbackground.png" id="1_f3sb7"]
 [ext_resource type="Script" uid="uid://dabglewe3snp1" path="res://world.gd" id="1_tlwt5"]
@@ -22,6 +22,15 @@ size = Vector2(21, 229)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_036b0"]
 size = Vector2(55, 240)
 
+[sub_resource type="LabelSettings" id="LabelSettings_aqk2v"]
+font_size = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_036b0"]
+font_size = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_dwbse"]
+font_size = 12
+
 [node name="World" type="Node2D"]
 script = ExtResource("1_tlwt5")
 metadata/_edit_lock_ = true
@@ -35,6 +44,7 @@ metadata/_edit_lock_ = true
 position = Vector2(63, 87)
 
 [node name="ScreenBorder" type="StaticBody2D" parent="."]
+visible = false
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -56,13 +66,13 @@ shape = SubResource("RectangleShape2D_tlwt5")
 
 [node name="DeathPlane" type="Area2D" parent="."]
 collision_layer = 0
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DeathPlane"]
 position = Vector2(160, 199)
 shape = SubResource("RectangleShape2D_aqk2v")
 debug_color = Color(1, 0, 0, 0.294118)
-metadata/_edit_lock_ = true
-metadata/_edit_group_ = true
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="DeathPlane"]
 position = Vector2(-24.5, 94.5)
@@ -81,11 +91,13 @@ vertical_alignment = 1
 metadata/_edit_lock_ = true
 
 [node name="SpawnZone" type="ColorRect" parent="."]
+visible = false
 offset_left = 337.0
 offset_top = -8.0
 offset_right = 377.0
 offset_bottom = 179.0
 color = Color(0, 1, 0, 0.203922)
+metadata/_edit_lock_ = true
 
 [node name="ObstacleTimer" type="Timer" parent="."]
 wait_time = 3.5
@@ -98,12 +110,6 @@ autostart = true
 [node name="FuelTimer" type="Timer" parent="."]
 wait_time = 6.0
 autostart = true
-
-[node name="DistanceLabel" type="Label" parent="."]
-offset_left = 204.0
-offset_top = 247.0
-offset_right = 244.0
-offset_bottom = 270.0
 
 [node name="FuelLabel" type="Label" parent="."]
 visibility_layer = 16
@@ -136,9 +142,34 @@ debug_color = Color(0.787252, 0.000234204, 0.718417, 0.42)
 position = Vector2(320, 0)
 
 [node name="TopSpawn" type="ColorRect" parent="."]
+visible = false
 offset_left = 1.0
 offset_top = -63.0
 offset_right = 320.0
 offset_bottom = -23.0
 color = Color(0.588235, 1, 0, 0.341176)
 metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="."]
+offset_left = 204.0
+offset_right = 320.0
+offset_bottom = 23.0
+text = "Distance:"
+label_settings = SubResource("LabelSettings_aqk2v")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Meters" type="Label" parent="Label"]
+offset_left = 103.0
+offset_right = 123.0
+offset_bottom = 20.0
+text = "m"
+label_settings = SubResource("LabelSettings_036b0")
+
+[node name="DistanceLabel" type="Label" parent="Label"]
+layout_mode = 0
+offset_left = 56.0
+offset_right = 96.0
+offset_bottom = 23.0
+text = "0"
+label_settings = SubResource("LabelSettings_dwbse")

@@ -4,7 +4,6 @@ const WallObstacle = preload("res://obstacle.tscn")
 const RockfallObstacle = preload("res://telegraph.tscn")
 const FuelPickup = preload("res://fuel.tscn")
 
-
 @onready var spawn_zone: ColorRect = $SpawnZone
 @onready var deathPlane: Area2D = $DeathPlane
 @onready var despawn_zone: Area2D = $DespawnZone
@@ -19,8 +18,10 @@ const FuelPickup = preload("res://fuel.tscn")
 @onready var fuelLabel: Label = $FuelLabel
 @onready var fuelCountLabel: Label = $FuelCountLabel
 @onready var deathLabel: Label = $YouAreDead
+@onready var distanceLabel: Label = $Label/DistanceLabel
 
-
+var metersTravelled = 0
+var difficulty = 1
 
 func _ready():
 	spawn_zone.hide()
@@ -32,6 +33,17 @@ func _ready():
 	Events.add_fuel.connect(_add_fuel.bind())
 	despawn_zone.body_entered.connect(_despawn_obstacle)
 	fuelTimer.timeout.connect(_spawn_fuel)
+
+func _process(_delta: float):
+	metersTravelled = metersTravelled+1
+	distanceLabel.text= str(metersTravelled)
+	## 20% speed increase every difficulty rank
+	if(metersTravelled> (difficulty*1000) && difficulty < 10):
+		obstacleTimer.wait_time = obstacleTimer.wait_time* - (obstacleTimer.wait_time*.20)
+		rockTimer.wait_time = rockTimer.wait_time - (rockTimer.wait_time*.20)
+		difficulty = difficulty+1
+		
+	
 
 func _check_if_dead(area: Node2D):
 	if(area is CharacterBody2D):
@@ -60,8 +72,8 @@ func _spawn_fuel():
 	var rect = spawn_zone.get_global_rect()
 	var fuel_x = randf_range(rect.position.x, rect.end.x)
 	##Fuel should always fully appear on screen.
-	## Note, numbers aren't right
-	var fuel_y = randf_range(rect.position.y-20, rect.end.y+10)
+	
+	var fuel_y = randf_range(rect.position.y+20, rect.end.y+10)
 	fuel.position = Vector2(fuel_x, fuel_y)
 	add_child(fuel)
 	
