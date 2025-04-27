@@ -6,13 +6,16 @@ extends Node2D
 @onready var hp_4: ColorRect = $HP4
 @onready var hp_5: ColorRect = $HP5
 
-var hp = 5
+var MAX_HP = 5
+var hp: int
 var hp_array = []
 
 func _ready():
+	hp = MAX_HP
 	hp_array = [hp_1, hp_2, hp_3, hp_4, hp_5]
 	
 	Events.take_damage.connect(_take_damage.bind())
+	Events.heal_hp.connect(_heal_hp.bind())
 	
 
 func _take_damage(damage: int):
@@ -24,5 +27,10 @@ func _take_damage(damage: int):
 		if hp == 0:
 			Events.zero_hp.emit()
 			break
-		
-	
+			
+func _heal_hp(amount: int):
+	var amount_healed = amount
+	while amount_healed > 0 and hp < MAX_HP:
+		hp_array[hp].set_color("#00ff2f")
+		hp += 1
+		amount_healed -=1

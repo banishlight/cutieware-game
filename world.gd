@@ -4,6 +4,8 @@ const WallObstacle = preload("res://obstacle.tscn")
 const RockfallObstacle = preload("res://telegraph.tscn")
 const FuelPickup = preload("res://fuel.tscn")
 const CannonballObstacle = preload("res://cannonball.tscn")
+const RepairPickup = preload("res://repair.tscn")
+
 
 @onready var spawn_zone: ColorRect = $SpawnZone
 @onready var deathPlane: Area2D = $DeathPlane
@@ -16,6 +18,7 @@ const CannonballObstacle = preload("res://cannonball.tscn")
 @onready var rockTimer: Timer = $RockTimer
 @onready var fuelTimer: Timer = $FuelTimer
 @onready var cannonballTimer: Timer = $CannonballTimer
+@onready var repairTimer: Timer =  $RepairTimer
 
 @onready var fuelLabel: Label = $FuelLabel
 @onready var fuelCountLabel: Label = $FuelCountLabel
@@ -38,7 +41,8 @@ func _ready():
 	Events.add_fuel.connect(_add_fuel.bind())
 	
 	#Timers
-	fuelTimer.timeout.connect(_spawn_fuel)
+	fuelTimer.timeout.connect(_spawn_powerup.bind("fuel"))
+	repairTimer.timeout.connect(_spawn_powerup.bind("repair"))
 	obstacleTimer.timeout.connect(_spawn_wall)
 	rockTimer.timeout.connect(_spawn_rockfall)
 	cannonballTimer.timeout.connect(_spawn_cannonball)
@@ -49,10 +53,11 @@ func _process(_delta: float):
 	if !gameOver:
 		metersTravelled = metersTravelled+1
 		distanceLabel.text= str(metersTravelled)
-		## 20% speed increase every difficulty rank
+		## 20% speed increase every difficulty rank, rocks get 10% speed increase instead.
 		if(metersTravelled> (difficulty*1000) && difficulty < 10):
 			obstacleTimer.wait_time = obstacleTimer.wait_time* - (obstacleTimer.wait_time*.20)
-			rockTimer.wait_time = rockTimer.wait_time - (rockTimer.wait_time*.20)
+			rockTimer.wait_time = rockTimer.wait_time - (rockTimer.wait_time*.10)
+			cannonballTimer.wait_time = cannonballTimer.wait_time* - (cannonballTimer.wait_time*.20)
 			difficulty = difficulty+1
 	
 
@@ -91,16 +96,20 @@ func _spawn_cannonball():
 	cannonball.position = Vector2(cannonball_x, cannonball_y)
 	add_child(cannonball)
 	
-	
-func _spawn_fuel():
-	var fuel = FuelPickup.instantiate()
+func _spawn_powerup(powerup_name: String):
+	var powerup
+	match powerup_name:
+		"fuel":
+			powerup = FuelPickup.instantiate()
+		"repair":
+			powerup = RepairPickup.instantiate()
+
 	var rect = spawn_zone.get_global_rect()
-	var fuel_x = randf_range(rect.position.x, rect.end.x)
-	##Fuel should always fully appear on screen.
-	
-	var fuel_y = randf_range(rect.position.y+20, rect.end.y+10)
-	fuel.position = Vector2(fuel_x, fuel_y)
-	add_child(fuel)
+	var powerup_x = randf_range(rect.position.x, rect.end.x)
+	##Powerups should always fully appear on screen.
+	var powerup_y = randf_range(rect.position.y+20, rect.end.y+10)
+	powerup.position = Vector2(powerup_x, powerup_y)
+	add_child(powerup)
 	
 func _out_of_fuel():
 	fuelLabel.text= "OUT OF FUEL"

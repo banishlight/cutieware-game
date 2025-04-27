@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var SPEED = 80
+var SPEED = 100
 var maxFuel = 1000
 var currentFuel = maxFuel
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -34,7 +34,7 @@ func _physics_process(delta: float):
 	else:
 		#slowly start dropping (glide)
 		if (back):
-			velocity.y = 10
+			velocity.y = 30
 		elif (!forward):
 			velocity.y = 6
 		fuelChange -= .1

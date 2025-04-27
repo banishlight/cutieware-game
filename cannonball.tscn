@@ -3,24 +3,24 @@
 [ext_resource type="Script" uid="uid://cl3joo71mtsuv" path="res://cannonball.gd" id="1_jmdrc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ngte0"]
-size = Vector2(32, 32)
+size = Vector2(24, 12)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jmdrc"]
-size = Vector2(20, 32)
 
 [node name="Cannonball" type="AnimatableBody2D"]
 script = ExtResource("1_jmdrc")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -12.0
-offset_top = -12.0
+offset_top = -6.0
 offset_right = 12.0
-offset_bottom = 12.0
+offset_bottom = 6.0
 color = Color(0.22, 0.22, 0.22, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 shape = SubResource("RectangleShape2D_ngte0")
+metadata/_edit_lock_ = true
 
 [node name="Hurtbox" type="Area2D" parent="."]
 

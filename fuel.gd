@@ -1,9 +1,12 @@
-extends Sprite2D
+extends Powerup
 
 @onready var pickupBox: Area2D = $Area2D
 var duration = 8
 var direction = Vector2.LEFT
+
+
 func _ready():
+	powerup_name = "fuel"
 	start_tween()
 	pickupBox.body_entered.connect(_pickup_check)
 	
