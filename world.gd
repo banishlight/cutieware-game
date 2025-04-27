@@ -21,7 +21,7 @@ const CannonballObstacle = preload("res://cannonball.tscn")
 @onready var fuelCountLabel: Label = $FuelCountLabel
 @onready var deathLabel: Label = $YouAreDead
 @onready var distanceLabel: Label = $Label/DistanceLabel
-
+@onready var hpBar: CanvasLayer = $HPBar
 var metersTravelled = 0
 var difficulty = 1
 var gameOver = false
@@ -42,6 +42,8 @@ func _ready():
 	obstacleTimer.timeout.connect(_spawn_wall)
 	rockTimer.timeout.connect(_spawn_rockfall)
 	cannonballTimer.timeout.connect(_spawn_cannonball)
+	
+	Events.zero_hp.connect(_die_and_game_over)
 
 func _process(_delta: float):
 	if !gameOver:
@@ -56,9 +58,12 @@ func _process(_delta: float):
 
 func _check_if_dead(area: Node2D):
 	if(area is CharacterBody2D):
-		ship.queue_free()
-		gameOver = true
-		deathLabel.text = "YOU ARE DEAD"
+		_die_and_game_over()
+		
+func _die_and_game_over():
+	ship.queue_free()
+	gameOver = true
+	deathLabel.text = "YOU ARE DEAD"
 	
 func _spawn_wall():
 	var wall = WallObstacle.instantiate()
@@ -108,3 +113,6 @@ func _update_fuel(count):
 	
 func _add_fuel(amount: int):
 	ship.currentFuel = ship.currentFuel+amount
+
+	
+	
