@@ -38,7 +38,6 @@ func _check_if_dead(area: Node2D):
 	
 func _spawn_obstacle():
 	var num = randi() % 2
-	print(num)
 	if num == 0:
 		spawn_wall()
 	else:
