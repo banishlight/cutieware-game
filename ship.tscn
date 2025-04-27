@@ -1,7 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://0dc5bhywxsec"]
+[gd_scene load_steps=10 format=3 uid="uid://0dc5bhywxsec"]
 
 [ext_resource type="Script" uid="uid://dnu06f1n6v2k2" path="res://ship.gd" id="1_4cq66"]
-[ext_resource type="Texture2D" uid="uid://5lm32gmk68wy" path="res://ship-Sheet.png" id="2_4cq66"]
+[ext_resource type="Texture2D" uid="uid://c6wropvrfype1" path="res://assets/shipv2.png" id="2_4cq66"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v4325"]
 atlas = ExtResource("2_4cq66")
@@ -15,6 +15,10 @@ region = Rect2(20, 0, 20, 12)
 atlas = ExtResource("2_4cq66")
 region = Rect2(40, 0, 20, 12)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_xpsff"]
+atlas = ExtResource("2_4cq66")
+region = Rect2(60, 0, 20, 12)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_xpsff"]
 animations = [{
 "frames": [{
@@ -26,6 +30,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_78o8j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xpsff")
 }],
 "loop": true,
 "name": &"default",
@@ -47,13 +54,15 @@ metadata/_edit_lock_ = true
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_xpsff")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, -0.5)
 shape = SubResource("RectangleShape2D_c3vuw")
 
 [node name="DeathCheckBox" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DeathCheckBox"]
+[node name="DeathCollision" type="CollisionShape2D" parent="DeathCheckBox"]
 position = Vector2(0.5, -0.5)
 shape = SubResource("RectangleShape2D_4cq66")
 debug_color = Color(1, 0, 0, 0.294118)
+
+[node name="DodgeTimer" type="Timer" parent="."]
