@@ -50,10 +50,10 @@ func _ready():
 	Events.zero_hp.connect(_die_and_game_over)
 
 func _process(_delta: float):
-	metersTravelled = metersTravelled+1
-	distanceLabel.text=str(metersTravelled)
-	## increase spawn timers at every 1000 meters, to add challenge.
 	if !gameOver:
+		metersTravelled = metersTravelled+1
+		distanceLabel.text=str(metersTravelled)
+		## increase spawn timers at every 1000 meters, to add challenge.
 		if(metersTravelled> (difficulty*1000) && difficulty < 8):
 			obstacleTimer.wait_time = obstacleTimer.wait_time - (obstacleTimer.wait_time*.06)
 			rockTimer.wait_time = rockTimer.wait_time - (rockTimer.wait_time*.10)

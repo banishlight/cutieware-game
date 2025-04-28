@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bpyltdofl3fpi"
-path="res://.godot/imported/rockfall.png-ebc910383da5a85654501e6b33114e8f.ctex"
+uid="uid://cc6iql0jsxtex"
+path="res://.godot/imported/rockfallv2.png-b91ce6c4324cea7cf111b317801c4722.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/rockfall.png"
-dest_files=["res://.godot/imported/rockfall.png-ebc910383da5a85654501e6b33114e8f.ctex"]
+source_file="res://assets/rockfallv2.png"
+dest_files=["res://.godot/imported/rockfallv2.png-b91ce6c4324cea7cf111b317801c4722.ctex"]
 
 [params]
 
