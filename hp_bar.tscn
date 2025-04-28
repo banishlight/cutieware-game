@@ -1,43 +1,51 @@
-[gd_scene load_steps=2 format=3 uid="uid://b7lk0g0ou6kxl"]
+[gd_scene load_steps=6 format=3 uid="uid://b7lk0g0ou6kxl"]
 
 [ext_resource type="Script" uid="uid://culgcwxf2giqy" path="res://hp_bar.gd" id="1_ybxu1"]
+[ext_resource type="Texture2D" uid="uid://clnmhalhh5mdd" path="res://assets/hpSquares.png" id="2_ceqaf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_57dvl"]
+atlas = ExtResource("2_ceqaf")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yjcuh"]
+atlas = ExtResource("2_ceqaf")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2w7h2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_57dvl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yjcuh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="HPBar" type="CanvasLayer"]
 
 [node name="Node2D" type="Node2D" parent="."]
 script = ExtResource("1_ybxu1")
 
-[node name="HP1" type="ColorRect" parent="Node2D"]
-offset_left = 108.0
-offset_top = 4.0
-offset_right = 116.0
-offset_bottom = 12.0
-color = Color(0, 1, 0.183333, 1)
+[node name="HP1" type="AnimatedSprite2D" parent="Node2D"]
+position = Vector2(88, 8)
+sprite_frames = SubResource("SpriteFrames_2w7h2")
 
-[node name="HP2" type="ColorRect" parent="Node2D"]
-offset_left = 120.0
-offset_top = 4.0
-offset_right = 128.0
-offset_bottom = 12.0
-color = Color(0, 1, 0.184314, 1)
+[node name="HP2" type="AnimatedSprite2D" parent="Node2D"]
+position = Vector2(108, 8)
+sprite_frames = SubResource("SpriteFrames_2w7h2")
 
-[node name="HP3" type="ColorRect" parent="Node2D"]
-offset_left = 132.0
-offset_top = 4.0
-offset_right = 140.0
-offset_bottom = 12.0
-color = Color(0, 1, 0.184314, 1)
+[node name="HP3" type="AnimatedSprite2D" parent="Node2D"]
+position = Vector2(128, 8)
+sprite_frames = SubResource("SpriteFrames_2w7h2")
 
-[node name="HP4" type="ColorRect" parent="Node2D"]
-offset_left = 144.0
-offset_top = 4.0
-offset_right = 152.0
-offset_bottom = 12.0
-color = Color(0, 1, 0.184314, 1)
+[node name="HP4" type="AnimatedSprite2D" parent="Node2D"]
+position = Vector2(148, 8)
+sprite_frames = SubResource("SpriteFrames_2w7h2")
 
-[node name="HP5" type="ColorRect" parent="Node2D"]
-offset_left = 156.0
-offset_top = 4.0
-offset_right = 164.0
-offset_bottom = 12.0
-color = Color(0, 1, 0.184314, 1)
+[node name="HP5" type="AnimatedSprite2D" parent="Node2D"]
+position = Vector2(168, 8)
+sprite_frames = SubResource("SpriteFrames_2w7h2")

@@ -21,7 +21,6 @@ const RepairPickup = preload("res://repair.tscn")
 @onready var repairTimer: Timer =  $RepairTimer
 
 @onready var fuelLabel: Label = $FuelLabel
-@onready var fuelCountLabel: Label = $FuelCountLabel
 @onready var fuelBar: TextureProgressBar = $FuelBar
 
 @onready var deathLabel: Label = $YouAreDead
@@ -86,7 +85,7 @@ func _check_if_dead(area: Node2D):
 func _die_and_game_over():
 	ship.queue_free()
 	gameOver = true
-	deathLabel.text = "YOU ARE DEAD"
+	deathLabel.text = "You have crashed."
 	
 func _spawn_wall():
 	var wall = WallObstacle.instantiate()
@@ -137,7 +136,6 @@ func _despawn_obstacle(object: Node2D):
 	
 func _update_fuel(count):
 	fuelBar.set_value_no_signal(count)
-	fuelCountLabel.text = "Fuel: " + str(count)
 	
 func _add_fuel(amount: int):
 	if ship.currentFuel + amount >= MAX_FUEL:
