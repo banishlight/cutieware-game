@@ -22,9 +22,9 @@ func _physics_process(delta: float):
 	velocity.y = 0
 	
 	if dodging:
-		fuelChange -= 2
-	elif Input.is_action_pressed("plane_dodge") and currentFuel > 50:
-		velocity.x = SPEED * .8
+		fuelChange -= 6
+	elif Input.is_action_pressed("plane_dodge") and currentFuel > 230:
+		velocity.x = SPEED * 1.6
 		#hold altitude
 		velocity.y = 0
 		dodging = true

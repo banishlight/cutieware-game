@@ -66,3 +66,4 @@ shape = SubResource("RectangleShape2D_4cq66")
 debug_color = Color(1, 0, 0, 0.294118)
 
 [node name="DodgeTimer" type="Timer" parent="."]
+wait_time = 0.6

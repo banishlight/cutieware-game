@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://ysd0nqcph1uq"]
 
-[ext_resource type="Texture2D" uid="uid://bsavk3no7bryy" path="res://assets/starbackground.png" id="1_f3sb7"]
 [ext_resource type="Script" uid="uid://dabglewe3snp1" path="res://world.gd" id="1_tlwt5"]
+[ext_resource type="Texture2D" uid="uid://ndo8a6arh8nx" path="res://assets/skyBackgroundV0.1.png" id="2_036b0"]
 [ext_resource type="PackedScene" uid="uid://0dc5bhywxsec" path="res://ship.tscn" id="2_fj7yv"]
 [ext_resource type="PackedScene" uid="uid://cqxyh815schnt" path="res://obstacle.tscn" id="4_aqk2v"]
 [ext_resource type="PackedScene" uid="uid://b7lk0g0ou6kxl" path="res://hp_bar.tscn" id="5_036b0"]
@@ -39,7 +39,7 @@ metadata/_edit_lock_ = true
 [node name="Background" type="Sprite2D" parent="."]
 visibility_layer = 17
 position = Vector2(160, 90)
-texture = ExtResource("1_f3sb7")
+texture = ExtResource("2_036b0")
 metadata/_edit_lock_ = true
 
 [node name="Ship" parent="." instance=ExtResource("2_fj7yv")]
@@ -47,6 +47,7 @@ position = Vector2(63, 87)
 
 [node name="ScreenBorder" type="StaticBody2D" parent="."]
 metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ScreenBorder"]
 position = Vector2(-10, 95.5)
@@ -61,7 +62,7 @@ position = Vector2(160, -10)
 shape = SubResource("RectangleShape2D_tlwt5")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="ScreenBorder"]
-position = Vector2(162, 201)
+position = Vector2(162, 204)
 shape = SubResource("RectangleShape2D_tlwt5")
 
 [node name="DeathPlane" type="Area2D" parent="."]
