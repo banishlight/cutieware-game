@@ -1,11 +1,12 @@
 extends AnimatableBody2D
 @onready var hurtbox: Area2D = $Hurtbox
-
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 var duration = 2
 var direction = Vector2.LEFT
 
 func _ready():
 	hurtbox.body_entered.connect(_calculate_hit)
+	sprite.play("default")
 	start_tween()
 	
 func start_tween():

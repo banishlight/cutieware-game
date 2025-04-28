@@ -1,30 +1,68 @@
-[gd_scene load_steps=4 format=3 uid="uid://1kvpqj2wc345"]
+[gd_scene load_steps=10 format=3 uid="uid://1kvpqj2wc345"]
 
 [ext_resource type="Script" uid="uid://cl3joo71mtsuv" path="res://cannonball.gd" id="1_jmdrc"]
+[ext_resource type="Texture2D" uid="uid://b6guuas6yao6a" path="res://assets/animcannonball.png" id="2_246s8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ngte0"]
-size = Vector2(24, 12)
+size = Vector2(18, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jmdrc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bdwag"]
+atlas = ExtResource("2_246s8")
+region = Rect2(0, 0, 24, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dix7p"]
+atlas = ExtResource("2_246s8")
+region = Rect2(24, 0, 24, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dfjte"]
+atlas = ExtResource("2_246s8")
+region = Rect2(48, 0, 24, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_288xo"]
+atlas = ExtResource("2_246s8")
+region = Rect2(72, 0, 24, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nuk8i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bdwag")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dix7p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dfjte")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_288xo")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
 
 [node name="Cannonball" type="AnimatableBody2D"]
 script = ExtResource("1_jmdrc")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -12.0
-offset_top = -6.0
-offset_right = 12.0
-offset_bottom = 6.0
-color = Color(0.22, 0.22, 0.22, 1)
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
+position = Vector2(-3, 0)
 shape = SubResource("RectangleShape2D_ngte0")
 metadata/_edit_lock_ = true
 
 [node name="Hurtbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Hurtbox"]
+visible = false
 position = Vector2(-6, 0)
 shape = SubResource("RectangleShape2D_jmdrc")
 debug_color = Color(0.7, 0, 0, 0.419608)
+metadata/_edit_lock_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_nuk8i")
+frame_progress = 0.236787
+metadata/_edit_lock_ = true

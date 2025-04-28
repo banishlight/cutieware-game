@@ -74,7 +74,6 @@ func _physics_process(delta: float):
 	move_and_slide()
 	
 func _recover_from_dodge():
-	print("tick!")
 	dodging = false
 	sprite.frame=0
 	collision.disabled=false

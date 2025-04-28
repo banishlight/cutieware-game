@@ -50,15 +50,28 @@ func _ready():
 	Events.zero_hp.connect(_die_and_game_over)
 
 func _process(_delta: float):
+	metersTravelled = metersTravelled+1
+	distanceLabel.text=str(metersTravelled)
+	## increase spawn timers at every 1000 meters, to add challenge.
 	if !gameOver:
-		metersTravelled = metersTravelled+1
-		distanceLabel.text= str(metersTravelled)
-		## 20% speed increase every difficulty rank, rocks get 10% speed increase instead.
-		if(metersTravelled> (difficulty*1000) && difficulty < 10):
-			obstacleTimer.wait_time = obstacleTimer.wait_time* - (obstacleTimer.wait_time*.20)
+		if(metersTravelled> (difficulty*1000) && difficulty < 8):
+			obstacleTimer.wait_time = obstacleTimer.wait_time - (obstacleTimer.wait_time*.06)
 			rockTimer.wait_time = rockTimer.wait_time - (rockTimer.wait_time*.10)
-			cannonballTimer.wait_time = cannonballTimer.wait_time* - (cannonballTimer.wait_time*.20)
+			cannonballTimer.wait_time = cannonballTimer.wait_time - (cannonballTimer.wait_time*.15)
 			difficulty = difficulty+1
+			#print('difficulty: ', difficulty)
+			#print('cannonball timer: ', cannonballTimer.wait_time)
+			#print('rock timer: ', rockTimer.wait_time)
+			#print('obstacle timer: ', obstacleTimer.wait_time)
+		elif(metersTravelled> (difficulty*1000) && (difficulty < 20 && difficulty >= 8)):
+			obstacleTimer.wait_time = obstacleTimer.wait_time - (obstacleTimer.wait_time*.02)
+			rockTimer.wait_time = rockTimer.wait_time - (rockTimer.wait_time*.05)
+			cannonballTimer.wait_time = cannonballTimer.wait_time - (cannonballTimer.wait_time*.08)
+			difficulty = difficulty+1
+			#print('difficulty: ', difficulty)
+			#print('cannonball timer: ', cannonballTimer.wait_time)
+			#print('rock timer: ', rockTimer.wait_time)
+			#print('obstacle timer: ', obstacleTimer.wait_time)
 	
 
 func _check_if_dead(area: Node2D):
