@@ -22,12 +22,17 @@ const RepairPickup = preload("res://repair.tscn")
 
 @onready var fuelLabel: Label = $FuelLabel
 @onready var fuelCountLabel: Label = $FuelCountLabel
+@onready var fuelBar: TextureProgressBar = $FuelBar
+
 @onready var deathLabel: Label = $YouAreDead
 @onready var distanceLabel: Label = $Label/DistanceLabel
 @onready var hpBar: CanvasLayer = $HPBar
 var metersTravelled = 0
 var difficulty = 1
 var gameOver = false
+
+##This should really be in Ship, but it's here for now
+var MAX_FUEL = 1500
 
 func _ready():
 	spawn_zone.hide()
@@ -131,10 +136,14 @@ func _despawn_obstacle(object: Node2D):
 	object.queue_free()
 	
 func _update_fuel(count):
+	fuelBar.set_value_no_signal(count)
 	fuelCountLabel.text = "Fuel: " + str(count)
 	
 func _add_fuel(amount: int):
-	ship.currentFuel = ship.currentFuel+amount
+	if ship.currentFuel + amount >= MAX_FUEL:
+		ship.currentFuel = MAX_FUEL
+	else:
+		ship.currentFuel = ship.currentFuel+amount
 
 	
 	

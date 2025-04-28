@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 var SPEED = 100
-var maxFuel = 1000
+# var maxFuel = 1500 in world.gd
 var currentFuel = 1000
 var dodging = false
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
