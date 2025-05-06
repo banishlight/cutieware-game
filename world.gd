@@ -23,6 +23,7 @@ const RepairPickup = preload("res://repair.tscn")
 @onready var fuelLabel: Label = $FuelLabel
 @onready var fuelBar: TextureProgressBar = $FuelBar
 
+@onready var restartButton: Button = $RestartButton
 @onready var deathLabel: Label = $YouAreDead
 @onready var distanceLabel: Label = $Label/DistanceLabel
 @onready var hpBar: CanvasLayer = $HPBar
@@ -52,6 +53,13 @@ func _ready():
 	cannonballTimer.timeout.connect(_spawn_cannonball)
 	
 	Events.zero_hp.connect(_die_and_game_over)
+	
+func _physics_process(delta: float):
+	if Input.is_action_just_pressed("restart"):
+		_restart()
+		
+func _restart():
+	get_tree().reload_current_scene()
 
 func _process(_delta: float):
 	if !gameOver:
@@ -63,19 +71,11 @@ func _process(_delta: float):
 			rockTimer.wait_time = rockTimer.wait_time - (rockTimer.wait_time*.10)
 			cannonballTimer.wait_time = cannonballTimer.wait_time - (cannonballTimer.wait_time*.15)
 			difficulty = difficulty+1
-			#print('difficulty: ', difficulty)
-			#print('cannonball timer: ', cannonballTimer.wait_time)
-			#print('rock timer: ', rockTimer.wait_time)
-			#print('obstacle timer: ', obstacleTimer.wait_time)
 		elif(metersTravelled> (difficulty*1000) && (difficulty < 20 && difficulty >= 8)):
 			obstacleTimer.wait_time = obstacleTimer.wait_time - (obstacleTimer.wait_time*.02)
 			rockTimer.wait_time = rockTimer.wait_time - (rockTimer.wait_time*.05)
 			cannonballTimer.wait_time = cannonballTimer.wait_time - (cannonballTimer.wait_time*.08)
 			difficulty = difficulty+1
-			#print('difficulty: ', difficulty)
-			#print('cannonball timer: ', cannonballTimer.wait_time)
-			#print('rock timer: ', rockTimer.wait_time)
-			#print('obstacle timer: ', obstacleTimer.wait_time)
 	
 
 func _check_if_dead(area: Node2D):
@@ -85,7 +85,11 @@ func _check_if_dead(area: Node2D):
 func _die_and_game_over():
 	ship.queue_free()
 	gameOver = true
-	deathLabel.text = "You have crashed."
+	deathLabel.visible = true
+	restartButton.visible = true
+	restartButton.disabled = false
+	fuelTimer.stop()
+	repairTimer.stop()
 	
 func _spawn_wall():
 	var wall = WallObstacle.instantiate()
@@ -145,3 +149,7 @@ func _add_fuel(amount: int):
 
 	
 	
+
+
+func _on_restart_button_pressed() -> void:
+	_restart()

@@ -73,15 +73,27 @@ shape = SubResource("RectangleShape2D_dwbse")
 debug_color = Color(0.7, 0, 0, 0.419608)
 
 [node name="YouAreDead" type="Label" parent="."]
+visible = false
 visibility_layer = 16
-offset_left = 55.0
+offset_left = 112.0
 offset_top = 39.0
-offset_right = 286.0
-offset_bottom = 145.0
+offset_right = 240.0
+offset_bottom = 124.0
+text = "You have crashed."
 label_settings = ExtResource("5_gbfbk")
 horizontal_alignment = 1
 vertical_alignment = 1
-metadata/_edit_lock_ = true
+
+[node name="RestartButton" type="Button" parent="."]
+visible = false
+offset_left = 124.0
+offset_top = 100.0
+offset_right = 227.0
+offset_bottom = 131.0
+disabled = true
+text = "Restart"
+
+[node name="RestartTransition" type="CanvasLayer" parent="."]
 
 [node name="SpawnZone" type="ColorRect" parent="."]
 visible = false
@@ -178,3 +190,5 @@ max_value = 1500.0
 texture_under = ExtResource("6_pkg7o")
 texture_progress = ExtResource("7_gbfbk")
 metadata/_edit_lock_ = true
+
+[connection signal="pressed" from="RestartButton" to="." method="_on_restart_button_pressed"]
