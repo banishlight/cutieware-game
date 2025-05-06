@@ -1,8 +1,8 @@
 [gd_scene load_steps=14 format=3 uid="uid://ysd0nqcph1uq"]
 
 [ext_resource type="Script" uid="uid://dabglewe3snp1" path="res://world.gd" id="1_tlwt5"]
-[ext_resource type="Texture2D" uid="uid://ndo8a6arh8nx" path="res://assets/skyBackgroundV0.1.png" id="2_036b0"]
 [ext_resource type="PackedScene" uid="uid://0dc5bhywxsec" path="res://ship.tscn" id="2_fj7yv"]
+[ext_resource type="PackedScene" uid="uid://bsyemkf2grx2m" path="res://background.tscn" id="2_ioo17"]
 [ext_resource type="PackedScene" uid="uid://cqxyh815schnt" path="res://obstacle.tscn" id="4_aqk2v"]
 [ext_resource type="PackedScene" uid="uid://b7lk0g0ou6kxl" path="res://hp_bar.tscn" id="5_036b0"]
 [ext_resource type="LabelSettings" uid="uid://bnfojo8c3cs36" path="res://assets/label.tres" id="5_gbfbk"]
@@ -28,11 +28,7 @@ size = Vector2(55, 240)
 script = ExtResource("1_tlwt5")
 metadata/_edit_lock_ = true
 
-[node name="Background" type="Sprite2D" parent="."]
-visibility_layer = 17
-position = Vector2(160, 90)
-texture = ExtResource("2_036b0")
-metadata/_edit_lock_ = true
+[node name="Background" parent="." instance=ExtResource("2_ioo17")]
 
 [node name="Ship" parent="." instance=ExtResource("2_fj7yv")]
 position = Vector2(63, 87)

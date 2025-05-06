@@ -33,6 +33,7 @@ animations = [{
 }]
 
 [node name="Telegraph" type="AnimatedSprite2D"]
+z_index = 5
 sprite_frames = SubResource("SpriteFrames_sr1io")
 frame_progress = 0.585427
 speed_scale = 3.0

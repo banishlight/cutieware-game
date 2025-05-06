@@ -26,10 +26,14 @@ const RepairPickup = preload("res://repair.tscn")
 @onready var restartButton: Button = $RestartButton
 @onready var deathLabel: Label = $YouAreDead
 @onready var distanceLabel: Label = $Label/DistanceLabel
-@onready var hpBar: CanvasLayer = $HPBar
+
+@onready var background: AnimatedSprite2D = $Background
+
+
 var metersTravelled = 0
 var difficulty = 1
 var gameOver = false
+var backgroundProgress = 0
 
 ##This should really be in Ship, but it's here for now
 var MAX_FUEL = 1500
@@ -65,6 +69,21 @@ func _process(_delta: float):
 	if !gameOver:
 		metersTravelled = metersTravelled+1
 		distanceLabel.text=str(metersTravelled)
+		## Change backgrounds at breakpoints:
+		if(backgroundProgress == 0 && metersTravelled > 2000):
+			background.play("change_1")
+			backgroundProgress = backgroundProgress + 1
+		elif(backgroundProgress == 1 && metersTravelled > 4000):
+			background.play("change_2")
+			backgroundProgress = backgroundProgress + 1
+		elif(backgroundProgress == 2 && metersTravelled > 6000):
+			background.play("change_3")
+			backgroundProgress = backgroundProgress + 1
+		elif(backgroundProgress == 3 && metersTravelled > 8000):
+			background.play("change_4")
+			backgroundProgress = backgroundProgress + 1
+		
+		
 		## increase spawn timers at every 1000 meters, to add challenge.
 		if(metersTravelled> (difficulty*1000) && difficulty < 8):
 			obstacleTimer.wait_time = obstacleTimer.wait_time - (obstacleTimer.wait_time*.06)
@@ -78,9 +97,12 @@ func _process(_delta: float):
 			difficulty = difficulty+1
 	
 
-func _check_if_dead(area: Node2D):
-	if(area is CharacterBody2D):
+func _check_if_dead(object: Node2D):
+	if(object is CharacterBody2D):
 		_die_and_game_over()
+	else:
+		object.queue_free()
+		
 		
 func _die_and_game_over():
 	ship.queue_free()
